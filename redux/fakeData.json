@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Мексиканская",
+    "price": 410,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/Pizza/ru-RU/54485799-7a7b-48a2-adf9-1f9769db254c.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Мясная",
+    "price": 420,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/Pizza/ru-RU/663e9479-44d8-4c3d-93f1-d0ebbce8e5a8.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Двойная пепперони",
+    "price": 430,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/Pizza/ru-RU/1c4152a8-2d89-424a-9285-91a8ddcb2d19.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Цыпленок барбекю",
+    "price": 440,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/Pizza/ru-RU/9812257f-ecd9-4363-b5d9-d43666a88047.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Дон Бекон",
+    "price": 450,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/bfd5c5ea8b804b4b80575c6432d40874_584x584.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "Ветчина и грибы",
+    "price": 340,
+    "image": "https://cdn.dodostatic.net/static/Img/Products/6a0f303734b042618984fe96bc681006_584x584.jpeg"
+  }
+]
