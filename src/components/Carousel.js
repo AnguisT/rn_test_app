@@ -31,7 +31,7 @@ class Carousel extends Component {
               <View
                 style={right ? styles.rightPizzaTitle : styles.leftPizzaTitle}>
                 <Text style={styleTitle}>{item.name}</Text>
-                <Text style={styleTitle}>{item.price} ₽</Text>
+                <Text style={[styleTitle, styles.opacity]}>{item.price} ₽</Text>
               </View>
               <View
                 style={
@@ -61,36 +61,44 @@ class Carousel extends Component {
 export default Carousel;
 
 const styles = StyleSheet.create({
-  containerItem: {height: 255 * BW},
+  containerItem: {
+    height: 255 * BW,
+  },
   itemLeftCarousel: {
     alignItems: 'flex-end',
   },
   leftCarouselImageWrapper: {
-    width: 120,
-    height: 250,
+    width: 120 * BW,
+    height: 250 * BW,
     backgroundColor: 'transparent',
     overflow: 'hidden',
   },
   leftPizzaTitle: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
     alignItems: 'flex-start',
   },
   itemRightCarousel: {
     alignItems: 'flex-start',
   },
   rightCarouselImageWrapper: {
-    width: 130,
-    height: 250,
+    width: 130 * BW,
+    height: 250 * BW,
     backgroundColor: 'transparent',
     overflow: 'hidden',
     alignItems: 'flex-end',
   },
   rightPizzaTitle: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
     alignItems: 'flex-end',
   },
   pizzaImage: {
-    width: 250,
-    height: 250,
-    borderRadius: 110,
+    width: 250 * BW,
+    height: 250 * BW,
+    borderRadius: 110 * BW,
     backgroundColor: 'transparent',
   },
   pizzaTitle: {
@@ -98,5 +106,8 @@ const styles = StyleSheet.create({
   },
   pizzaTitleNone: {
     color: 'white',
+  },
+  opacity: {
+    opacity: 0.5,
   },
 });
