@@ -38,7 +38,11 @@ class Carousel extends Component {
             activeOpacity={1}
             onPress={() => this.startAnimation(activeItem - 1)}
             style={styles.buttonChange}>
-            <Image source={require('../../assets/Arrow-Up.png')} />
+            <Image
+              resizeMode="contain"
+              style={styles.arrowImage}
+              source={require('../../assets/arrow-up.png')}
+            />
           </TouchableOpacity>
         ) : (
           <View style={styles.buttonChange} />
@@ -89,7 +93,11 @@ class Carousel extends Component {
             activeOpacity={1}
             onPress={() => this.startAnimation(activeItem + 1)}
             style={[styles.buttonChange]}>
-            <Image source={require('../../assets/Arrow-Down.png')} />
+            <Image
+              style={styles.arrowImage}
+              resizeMode="contain"
+              source={require('../../assets/arrow-down.png')}
+            />
           </TouchableOpacity>
         ) : (
           <View style={[styles.buttonChange]} />
@@ -160,4 +168,8 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   marginTop: {marginTop: 25 * BW},
+  arrowImage: {
+    height: 25 * BW,
+    width: 25 * BW,
+  },
 });
