@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BW} from '../const';
 
 class Carousel extends Component {
   state = {
@@ -123,39 +122,39 @@ const styles = StyleSheet.create({
   },
   flex: {flex: 1},
   containerItem: {
-    paddingHorizontal: 1 * BW,
+    paddingHorizontal: 1,
   },
   itemLeftCarousel: {
     alignItems: 'flex-end',
   },
   leftCarouselImageWrapper: {
-    width: 120 * BW,
-    height: 250 * BW,
+    width: 120,
+    height: 250,
     backgroundColor: 'transparent',
     overflow: 'hidden',
   },
   leftPizzaTitle: {
-    height: 25 * BW,
+    height: 25,
     alignItems: 'flex-start',
   },
   itemRightCarousel: {
     alignItems: 'flex-start',
   },
   rightCarouselImageWrapper: {
-    width: 130 * BW,
-    height: 250 * BW,
+    width: 130,
+    height: 250,
     backgroundColor: 'transparent',
     overflow: 'hidden',
     alignItems: 'flex-end',
   },
   rightPizzaTitle: {
-    height: 25 * BW,
+    height: 25,
     alignItems: 'flex-end',
   },
   pizzaImage: {
-    width: 250 * BW,
-    height: 250 * BW,
-    borderRadius: 110 * BW,
+    width: 250,
+    height: 250,
+    borderRadius: 110,
     backgroundColor: 'transparent',
   },
   pizzaTitle: {
@@ -167,9 +166,9 @@ const styles = StyleSheet.create({
   opacity: {
     opacity: 0.5,
   },
-  marginTop: {marginTop: 25 * BW},
+  marginTop: {marginTop: 25},
   arrowImage: {
-    height: 25 * BW,
-    width: 25 * BW,
+    height: 25,
+    width: 25,
   },
 });

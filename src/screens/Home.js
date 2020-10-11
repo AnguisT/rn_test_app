@@ -13,7 +13,6 @@ import {bindActionCreators} from 'redux';
 
 import Carousel from '../components/Carousel';
 import {pizzaRequestAsync} from '../../redux/actions';
-import {BW} from '../const';
 
 class Home extends Component {
   state = {
@@ -123,7 +122,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    paddingHorizontal: 15 * BW,
+    paddingHorizontal: 15,
     justifyContent: 'center',
   },
   containerCarousel: {
@@ -132,20 +131,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerPrice: {
-    paddingTop: 5 * BW,
+    paddingTop: 5,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   textPrice: {
-    fontSize: 16 * BW,
+    fontSize: 16,
   },
   containerFinishButton: {
-    height: 70 * BW,
-    padding: 10 * BW,
+    height: 70,
+    padding: 10,
   },
   finishButton: {
-    borderRadius: 10 * BW,
+    borderRadius: 10,
     backgroundColor: '#e96c2c',
     justifyContent: 'center',
     alignItems: 'center',
@@ -154,19 +153,19 @@ const styles = StyleSheet.create({
   },
   finishText: {
     color: 'white',
-    fontSize: 16 * BW,
+    fontSize: 16,
   },
   randomImage: {
-    height: 25 * BW,
-    width: 25 * BW,
+    height: 25,
+    width: 25,
   },
   floatButton: {
     position: 'absolute',
-    height: 50 * BW,
-    width: 50 * BW,
-    borderRadius: 25 * BW,
-    bottom: 100 * BW,
-    right: 15 * BW,
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    bottom: 100,
+    right: 15,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
