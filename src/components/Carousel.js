@@ -20,10 +20,7 @@ class Carousel extends Component {
           {pizza.map((item, index) => {
             return (
               index === activeItem && (
-                <View
-                  key={`l${item.id}`}
-                  style={styles.containerItem}
-                  onLayout={this.props.onLayoutItem}>
+                <View key={`l${item.id}`} style={styles.containerItem}>
                   <View
                     style={
                       right ? styles.rightPizzaTitle : styles.leftPizzaTitle
@@ -94,10 +91,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   leftPizzaTitle: {
-    zIndex: 100,
-    position: 'absolute',
-    top: 0,
-    left: 0,
     alignItems: 'flex-start',
   },
   itemRightCarousel: {
@@ -111,10 +104,6 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   rightPizzaTitle: {
-    zIndex: 100,
-    position: 'absolute',
-    top: 0,
-    right: 0,
     alignItems: 'flex-end',
   },
   pizzaImage: {
