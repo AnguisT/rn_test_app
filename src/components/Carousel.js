@@ -9,9 +9,10 @@ class Carousel extends Component {
       <View style={styles.containerCarousel}>
         {activeItem > 0 ? (
           <TouchableOpacity
+            activeOpacity={1}
             onPress={() => this.props.onSelect(activeItem - 1)}
             style={styles.buttonChange}>
-            <Text>Prev</Text>
+            <Image source={require('../../assets/Arrow-Up.png')} />
           </TouchableOpacity>
         ) : (
           <View style={styles.buttonChange} />
@@ -26,7 +27,9 @@ class Carousel extends Component {
                       right ? styles.rightPizzaTitle : styles.leftPizzaTitle
                     }>
                     <Text style={styles.pizzaTitle}>{item.name}</Text>
-                    <Text style={styles.pizzaTitle}>{item.price} ₽</Text>
+                    <Text style={[styles.pizzaTitle, styles.opacity]}>
+                      {item.price} ₽
+                    </Text>
                   </View>
                   <View
                     style={
@@ -52,12 +55,13 @@ class Carousel extends Component {
         </View>
         {activeItem < pizza.length - 1 ? (
           <TouchableOpacity
+            activeOpacity={1}
             onPress={() => this.props.onSelect(activeItem + 1)}
-            style={styles.buttonChange}>
-            <Text>Next</Text>
+            style={[styles.buttonChange, {marginTop: 25 * BW}]}>
+            <Image source={require('../../assets/Arrow-Down.png')} />
           </TouchableOpacity>
         ) : (
-          <View style={styles.buttonChange} />
+          <View style={[styles.buttonChange, {marginTop: 25 * BW}]} />
         )}
       </View>
     );
@@ -69,6 +73,7 @@ export default Carousel;
 const styles = StyleSheet.create({
   containerCarousel: {
     width: '50%',
+    overflow: 'hidden',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -91,6 +96,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   leftPizzaTitle: {
+    height: 25 * BW,
     alignItems: 'flex-start',
   },
   itemRightCarousel: {
@@ -104,6 +110,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   rightPizzaTitle: {
+    height: 25 * BW,
     alignItems: 'flex-end',
   },
   pizzaImage: {

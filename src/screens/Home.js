@@ -6,6 +6,7 @@ import {
   Platform,
   Text,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
@@ -69,45 +70,53 @@ class Home extends Component {
 
   render() {
     const {firstPrice, secondPrice} = this.state;
-    const {pizza} = this.props;
+    const {pizza, isLoadingPizza} = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.containerCarousel}>
-          <Carousel
-            pizza={pizza}
-            activeItem={this.state.firstActive}
-            onSelect={(val) =>
-              this.changePizza(val, 'firstActive', 'firstPrice')
-            }
-          />
-          <Carousel
-            right
-            pizza={pizza}
-            activeItem={this.state.secondActive}
-            onSelect={(val) =>
-              this.changePizza(val, 'secondActive', 'secondPrice')
-            }
-          />
-        </View>
-        <View style={styles.containerPrice}>
-          <Text style={styles.textPrice}>
-            Цена {firstPrice + secondPrice} ₽
-          </Text>
-        </View>
-        <View style={styles.containerFinishButton}>
-          <TouchableOpacity
-            style={styles.finishButton}
-            onPress={() => console.log('Объединить половинки')}>
-            <Text style={styles.finishText}>Объединить половинки</Text>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.floatButton} onPress={this.randomPizza}>
-          <Image
-            resizeMode="contain"
-            style={styles.randomImage}
-            source={require('../../assets/random.png')}
-          />
-        </TouchableOpacity>
+        {isLoadingPizza ? (
+          <ActivityIndicator size="large" color="red" />
+        ) : (
+          <>
+            <View style={styles.containerCarousel}>
+              <Carousel
+                pizza={pizza}
+                activeItem={this.state.firstActive}
+                onSelect={(val) =>
+                  this.changePizza(val, 'firstActive', 'firstPrice')
+                }
+              />
+              <Carousel
+                right
+                pizza={pizza}
+                activeItem={this.state.secondActive}
+                onSelect={(val) =>
+                  this.changePizza(val, 'secondActive', 'secondPrice')
+                }
+              />
+            </View>
+            <View style={styles.containerPrice}>
+              <Text style={styles.textPrice}>
+                Цена {firstPrice + secondPrice} ₽
+              </Text>
+            </View>
+            <View style={styles.containerFinishButton}>
+              <TouchableOpacity
+                style={styles.finishButton}
+                onPress={() => console.log('Объединить половинки')}>
+                <Text style={styles.finishText}>Объединить половинки</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.floatButton}
+              onPress={this.randomPizza}>
+              <Image
+                resizeMode="contain"
+                style={styles.randomImage}
+                source={require('../../assets/random.png')}
+              />
+            </TouchableOpacity>
+          </>
+        )}
       </View>
     );
   }

@@ -16,11 +16,13 @@ export const fetchPizzaFailed = () => ({
 
 export const pizzaRequestAsync = () => async (dispatch) => {
   dispatch(fetchPizza());
-  const result = fakeData;
-  if (!result.length) {
-    dispatch(fetchPizzaFailed());
-    return;
-  }
+  setTimeout(() => {
+    const result = fakeData;
+    if (!result.length) {
+      dispatch(fetchPizzaFailed());
+      return;
+    }
 
-  dispatch(fetchPizzaSuccess(result));
+    dispatch(fetchPizzaSuccess(result));
+  }, 2000);
 };
