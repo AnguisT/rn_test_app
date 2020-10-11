@@ -35,7 +35,7 @@ class Carousel extends Component {
       <View style={styles.containerCarousel}>
         {activeItem > 0 ? (
           <TouchableOpacity
-            activeOpacity={1}
+            activeOpacity={0.5}
             onPress={() => this.startAnimation(activeItem - 1)}
             style={styles.buttonChange}>
             <Image
