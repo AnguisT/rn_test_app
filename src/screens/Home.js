@@ -18,11 +18,9 @@ class Home extends Component {
   state = {
     firstPrice: 0,
     firstActive: 0,
-    firstYPositions: [],
 
     secondPrice: 0,
     secondActive: 0,
-    secondYPositions: [],
   };
 
   componentDidMount() {
@@ -40,14 +38,6 @@ class Home extends Component {
     }
   }
 
-  _renderItem = ({item, index}) => {
-    return (
-      <View style={styles.slide}>
-        <Text style={styles.title}>{item.name}</Text>
-      </View>
-    );
-  };
-
   onScroll = (event, field, active) => {
     const index = Math.round(event.nativeEvent.contentOffset.y / 255);
     this.setState({[field]: this.props.pizza[index].price, [active]: index});
@@ -60,6 +50,23 @@ class Home extends Component {
     }));
   };
 
+  changePizza = (val, active, field) => {
+    const {pizza} = this.props;
+    this.setState({[active]: val, [field]: pizza[val].price});
+  };
+
+  randomPizza = () => {
+    const {pizza} = this.props;
+    const first = Math.floor(Math.random() * 6);
+    const second = Math.floor(Math.random() * 6);
+    this.setState({
+      firstActive: first,
+      secondActive: second,
+      firstPrice: pizza[first].price,
+      secondPrice: pizza[second].price,
+    });
+  };
+
   render() {
     const {firstPrice, secondPrice} = this.state;
     const {pizza} = this.props;
@@ -67,26 +74,18 @@ class Home extends Component {
       <View style={styles.container}>
         <View style={styles.containerCarousel}>
           <Carousel
-            onRef={(ref) => (this.scrollViewLeft = ref)}
             pizza={pizza}
-            onScroll={(event) =>
-              this.onScroll(event, 'firstPrice', 'firstActive')
-            }
             activeItem={this.state.firstActive}
-            onLayoutItem={(event) =>
-              this.onLayoutItem(event, 'firstYPositions')
+            onSelect={(val) =>
+              this.changePizza(val, 'firstActive', 'firstPrice')
             }
           />
           <Carousel
             right
-            onRef={(ref) => (this.scrollViewRight = ref)}
             pizza={pizza}
-            onScroll={(event) =>
-              this.onScroll(event, 'secondPrice', 'secondActive')
-            }
             activeItem={this.state.secondActive}
-            onLayoutItem={(event) =>
-              this.onLayoutItem(event, 'secondYPositions')
+            onSelect={(val) =>
+              this.changePizza(val, 'secondActive', 'secondPrice')
             }
           />
         </View>
@@ -102,19 +101,7 @@ class Home extends Component {
             <Text style={styles.finishText}>Объединить половинки</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.floatButton}
-          onPress={() => {
-            const {firstYPositions, secondYPositions} = this.state;
-            this.scrollViewLeft.scrollTo({
-              y: firstYPositions[Math.floor(Math.random() * 6)],
-              animated: true,
-            });
-            this.scrollViewRight.scrollTo({
-              y: secondYPositions[Math.floor(Math.random() * 6)],
-              animated: true,
-            });
-          }}>
+        <TouchableOpacity style={styles.floatButton} onPress={this.randomPizza}>
           <Image
             resizeMode="contain"
             style={styles.randomImage}
@@ -140,34 +127,25 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     paddingHorizontal: 15 * BW,
+    justifyContent: 'center',
   },
   containerCarousel: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   containerPrice: {
-    position: 'absolute',
-    bottom: 70 * BW,
-    left: 15 * BW,
-    right: 15 * BW,
     paddingTop: 5 * BW,
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
   },
   textPrice: {
     fontSize: 16 * BW,
   },
   containerFinishButton: {
-    position: 'absolute',
-    bottom: 0 * BW,
-    right: 0 * BW,
-    left: 0 * BW,
     height: 70 * BW,
     padding: 10 * BW,
-    backgroundColor: 'white',
   },
   finishButton: {
     borderRadius: 10 * BW,

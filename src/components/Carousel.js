@@ -1,59 +1,68 @@
 import React, {Component} from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {BW} from '../const';
 
 class Carousel extends Component {
   render() {
-    const {right, pizza} = this.props;
+    const {pizza, right, activeItem} = this.props;
     return (
-      <ScrollView
-        ref={(ref) => this.props.onRef(ref)}
-        onScroll={this.props.onScroll}
-        showsVerticalScrollIndicator={false}
-        decelerationRate={0}
-        snapToInterval={255 * BW}
-        contentContainerStyle={{
-          paddingVertical: 255 * BW,
-        }}
-        snapToAlignment={'center'}
-        overScrollMode="never"
-        pagingEnabled>
-        {pizza.map((item, index) => {
-          const styleTitle =
-            this.props.activeItem === index
-              ? styles.pizzaTitle
-              : styles.pizzaTitleNone;
-          return (
-            <View
-              key={`l${item.id}`}
-              style={styles.containerItem}
-              onLayout={this.props.onLayoutItem}>
-              <View
-                style={right ? styles.rightPizzaTitle : styles.leftPizzaTitle}>
-                <Text style={styleTitle}>{item.name}</Text>
-                <Text style={[styleTitle, styles.opacity]}>{item.price} ₽</Text>
-              </View>
-              <View
-                style={
-                  right ? styles.itemRightCarousel : styles.itemLeftCarousel
-                }>
+      <View style={styles.containerCarousel}>
+        {activeItem > 0 ? (
+          <TouchableOpacity
+            onPress={() => this.props.onSelect(activeItem - 1)}
+            style={styles.buttonChange}>
+            <Text>Prev</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.buttonChange} />
+        )}
+        <View style={styles.flex}>
+          {pizza.map((item, index) => {
+            return (
+              index === activeItem && (
                 <View
-                  style={
-                    right
-                      ? styles.rightCarouselImageWrapper
-                      : styles.leftCarouselImageWrapper
-                  }>
-                  <Image
-                    resizeMode="contain"
-                    style={styles.pizzaImage}
-                    source={{uri: item.image}}
-                  />
+                  key={`l${item.id}`}
+                  style={styles.containerItem}
+                  onLayout={this.props.onLayoutItem}>
+                  <View
+                    style={
+                      right ? styles.rightPizzaTitle : styles.leftPizzaTitle
+                    }>
+                    <Text style={styles.pizzaTitle}>{item.name}</Text>
+                    <Text style={styles.pizzaTitle}>{item.price} ₽</Text>
+                  </View>
+                  <View
+                    style={
+                      right ? styles.itemRightCarousel : styles.itemLeftCarousel
+                    }>
+                    <View
+                      style={
+                        right
+                          ? styles.rightCarouselImageWrapper
+                          : styles.leftCarouselImageWrapper
+                      }>
+                      <Image
+                        resizeMode="contain"
+                        style={styles.pizzaImage}
+                        source={{uri: item.image}}
+                      />
+                    </View>
+                  </View>
                 </View>
-              </View>
-            </View>
-          );
-        })}
-      </ScrollView>
+              )
+            );
+          })}
+        </View>
+        {activeItem < pizza.length - 1 ? (
+          <TouchableOpacity
+            onPress={() => this.props.onSelect(activeItem + 1)}
+            style={styles.buttonChange}>
+            <Text>Next</Text>
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.buttonChange} />
+        )}
+      </View>
     );
   }
 }
@@ -61,8 +70,19 @@ class Carousel extends Component {
 export default Carousel;
 
 const styles = StyleSheet.create({
+  containerCarousel: {
+    width: '50%',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  buttonChange: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  flex: {flex: 1},
   containerItem: {
-    height: 255 * BW,
+    paddingHorizontal: 1 * BW,
   },
   itemLeftCarousel: {
     alignItems: 'flex-end',
@@ -74,6 +94,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   leftPizzaTitle: {
+    zIndex: 100,
     position: 'absolute',
     top: 0,
     left: 0,
@@ -90,6 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
   },
   rightPizzaTitle: {
+    zIndex: 100,
     position: 'absolute',
     top: 0,
     right: 0,
