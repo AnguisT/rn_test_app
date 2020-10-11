@@ -39,18 +39,6 @@ class Home extends Component {
     }
   }
 
-  onScroll = (event, field, active) => {
-    const index = Math.round(event.nativeEvent.contentOffset.y / 255);
-    this.setState({[field]: this.props.pizza[index].price, [active]: index});
-  };
-
-  onLayoutItem = (event, array) => {
-    const yPosition = event.nativeEvent.layout.y;
-    this.setState((state) => ({
-      [array]: [...state[array], yPosition],
-    }));
-  };
-
   changePizza = (val, active, field) => {
     const {pizza} = this.props;
     this.setState({[active]: val, [field]: pizza[val].price});

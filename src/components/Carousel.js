@@ -1,8 +1,34 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Animated,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {BW} from '../const';
 
 class Carousel extends Component {
+  state = {
+    animation: new Animated.Value(1),
+  };
+
+  startAnimation = (index) => {
+    Animated.timing(this.state.animation, {
+      toValue: 0,
+      timing: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      this.props.onSelect(index);
+      Animated.timing(this.state.animation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    });
+  };
+
   render() {
     const {pizza, right, activeItem} = this.props;
     return (
@@ -10,7 +36,7 @@ class Carousel extends Component {
         {activeItem > 0 ? (
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => this.props.onSelect(activeItem - 1)}
+            onPress={() => this.startAnimation(activeItem - 1)}
             style={styles.buttonChange}>
             <Image source={require('../../assets/Arrow-Up.png')} />
           </TouchableOpacity>
@@ -21,7 +47,12 @@ class Carousel extends Component {
           {pizza.map((item, index) => {
             return (
               index === activeItem && (
-                <View key={`l${item.id}`} style={styles.containerItem}>
+                <Animated.View
+                  key={`l${item.id}`}
+                  style={[
+                    styles.containerItem,
+                    {opacity: this.state.animation},
+                  ]}>
                   <View
                     style={
                       right ? styles.rightPizzaTitle : styles.leftPizzaTitle
@@ -48,7 +79,7 @@ class Carousel extends Component {
                       />
                     </View>
                   </View>
-                </View>
+                </Animated.View>
               )
             );
           })}
@@ -56,12 +87,12 @@ class Carousel extends Component {
         {activeItem < pizza.length - 1 ? (
           <TouchableOpacity
             activeOpacity={1}
-            onPress={() => this.props.onSelect(activeItem + 1)}
-            style={[styles.buttonChange, {marginTop: 25 * BW}]}>
+            onPress={() => this.startAnimation(activeItem + 1)}
+            style={[styles.buttonChange]}>
             <Image source={require('../../assets/Arrow-Down.png')} />
           </TouchableOpacity>
         ) : (
-          <View style={[styles.buttonChange, {marginTop: 25 * BW}]} />
+          <View style={[styles.buttonChange]} />
         )}
       </View>
     );
@@ -128,4 +159,5 @@ const styles = StyleSheet.create({
   opacity: {
     opacity: 0.5,
   },
+  marginTop: {marginTop: 25 * BW},
 });
